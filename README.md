@@ -29,6 +29,18 @@ O Schema Registry é uma ferramenta que permite armazenar e gerenciar esquemas d
 ### Containers:
 A tecnologia de containers é utilizada para empacotar e distribuir os componentes do projeto de forma isolada e portátil. O Docker é frequentemente utilizado para criar e gerenciar esses containers, permitindo a execução dos serviços de forma consistente e independente do ambiente de hospedagem.(ver arquivos docker-compose).
 
+Usamos o Landoop porque conseguimos gerenciar os seguintes serviços de forma simplificada:
+
+- ZooKeeper: O serviço de gerenciamento de configurações e coordenador de Kafka.
+- Kafka Broker: O serviço principal de mensagens do Kafka.
+- Schema Registry: Para gerenciar esquemas de dados e garantir a compatibilidade entre produtores e consumidores.
+- Kafka Rest Proxy: Uma interface HTTP para o Kafka, permitindo que aplicativos não nativos do Kafka publiquem e consumam mensagens via RESTful.
+- Kafdrop: Uma ferramenta de interface web para visualizar e monitorar tópicos do Kafka e suas mensagens.
+
+O container com o landoop utilizando os serviços acima(ZooKeeper, Kafka Broker, Schema Registry, Rest Proxy e Kafdrop), porém o landoop possui diversos outros serviços que não estão sendo utilizados nesse projeto: 
+
+![container-docker](img/container.png)
+
 Backend
 - [x] Apache Kafka - teoria e prática
 - [x] Produtores com spring kafka
@@ -40,3 +52,13 @@ Backend
 - [X] Exemplo real completo utilizando kafka, zookeeper, Schema-registry, rest-proxy via container e 
 - [X] ecossistesma spring
 - [X] Entendendo kafdrop
+
+### Funcionamento
+Publicando mensagem
+![requisicao](img/requisicao-producer.png)
+
+Serviço com log que a publicação foi efetuada com sucesso no tópico.
+![producer](img/Producer.png)
+
+Serviço com log que a mensagem foi consumida com sucesso no tópico.
+![consumer](img/Consumer.png)
